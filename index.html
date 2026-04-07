@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Anandotsav Exhibition | Events & Exhibitions</title>
+  <!-- Google Fonts & simple CSS reset -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fef8f0;
+      color: #2c2b28;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* container utility */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* header / nav */
+    header {
+      background: #ffffffdd;
+      backdrop-filter: blur(12px);
+      background: #fff9f0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #ffe3c6;
+    }
+
+    .navbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    .logo h1 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: #c45c1b;
+    }
+    .logo p {
+      font-size: 0.75rem;
+      color: #8b5a2b;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #4a3727;
+      transition: 0.2s;
+      font-size: 1rem;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: #d2691e;
+      border-bottom: 2px solid #d2691e;
+      padding-bottom: 4px;
+    }
+
+    /* mobile menu */
+    .menu-toggle {
+      display: none;
+      font-size: 1.7rem;
+      cursor: pointer;
+      color: #c45c1b;
+    }
+
+    /* sections */
+    section {
+      padding: 80px 0;
+      border-bottom: 1px solid #ffe6d5;
+    }
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: #b4531a;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: #f3a261;
+      border-radius: 4px;
+    }
+
+    /* about & cards */
+    .about-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    .about-text {
+      flex: 2;
+      font-size: 1.1rem;
+      color: #2f2e2c;
+    }
+    .about-highlight {
+      flex: 1;
+      background: #fff3e8;
+      padding: 2rem;
+      border-radius: 32px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+    }
+    .stat {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: #d1661a;
+    }
+
+    /* contact grid */
+    .contact-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+    }
+    .contact-info {
+      flex: 1;
+      background: #ffffffd9;
+      padding: 1.8rem;
+      border-radius: 32px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    }
+    .contact-detail {
+      margin: 1.5rem 0;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 1.1rem;
+    }
+    .contact-detail i {
+      width: 36px;
+      font-size: 1.6rem;
+      color: #d2691e;
+    }
+    .map-placeholder {
+      flex: 1;
+      background: #e9dfd3;
+      border-radius: 32px;
+      padding: 1rem;
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-family: monospace;
+    }
+
+    /* cards for exhibitions */
+    .expo-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .card {
+      background: white;
+      border-radius: 28px;
+      padding: 1.8rem;
+      flex: 1;
+      min-width: 220px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.02);
+      border: 1px solid #ffecd9;
+      transition: all 0.2s;
+    }
+    .card i {
+      font-size: 2.5rem;
+      color: #d2691e;
+      margin-bottom: 1rem;
+    }
+
+    /* legal pages (privacy, terms) hidden by default, shown via hash */
+    .legal-page {
+      display: none;
+    }
+    .legal-page.active-legal {
+      display: block;
+    }
+    .legal-content {
+      background: #fffaf5;
+      border-radius: 32px;
+      padding: 2rem;
+      margin-top: 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+    }
+    .legal-content h3 {
+      margin: 1.2rem 0 0.6rem;
+      color: #b4531a;
+    }
+
+    footer {
+      background: #2a241e;
+      color: #f0e1d0;
+      padding: 40px 0 20px;
+      font-size: 0.9rem;
+    }
+    .footer-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .copyright {
+      text-align: center;
+      border-top: 1px solid #4f3e2e;
+      padding-top: 1.5rem;
+      font-size: 0.85rem;
+    }
+    .footer-links a {
+      color: #f3bc8c;
+      text-decoration: none;
+      margin-right: 1.5rem;
+    }
+    .btn {
+      background: #d2691e;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 40px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #d2691e;
+      color: #d2691e;
+    }
+
+    @media (max-width: 800px) {
+      .menu-toggle { display: block; }
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 0;
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .navbar {
+        flex-wrap: wrap;
+      }
+      .section-title { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container navbar">
+    <div class="logo">
+      <h1>Anandotsav Exhibition</h1>
+      <p>powered by SAVANT CREATION</p>
+    </div>
+    <div class="menu-toggle" id="mobileMenu">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links" id="navList">
+      <li><a href="#" data-page="home" class="nav-link active">Home</a></li>
+      <li><a href="#" data-page="about">About</a></li>
+      <li><a href="#" data-page="contact">Contact</a></li>
+      <li><a href="#" data-page="privacy">Privacy Policy</a></li>
+      <li><a href="#" data-page="terms">Terms & Condition</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <!-- HOME SECTION -->
+  <section id="homeSection" class="page-section">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <span style="background:#f3e1cf; padding:0.4rem 1.2rem; border-radius:40px; font-weight:600;">✨ Where Celebrations Begin ✨</span>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <h2 class="section-title" style="margin-top:0;">Grand Exhibitions & Events</h2>
+          <p style="font-size:1.2rem; margin: 1.5rem 0 1rem;">Anandotsav Exhibition powered by <strong>SAVANT CREATION</strong> brings together vibrant showcases, cultural events, and trade exhibitions across multiple cities. We transform spaces into memorable experiences.</p>
+          <p>From art & craft expos to business networking events, we craft each exhibition with passion and professionalism. Join us in celebrating creativity, commerce, and community.</p>
+          <a href="#" data-page="contact" class="btn" style="display: inline-block; margin-top: 2rem;">Get in Touch →</a>
+        </div>
+        <div class="about-highlight">
+          <i class="fas fa-calendar-alt" style="font-size: 2.8rem; color:#d2691e;"></i>
+          <div class="stat">10+</div>
+          <div>Successful Exhibitions</div>
+          <div class="stat" style="margin-top:1rem;">6+</div>
+          <div>Partner Cities</div>
+        </div>
+      </div>
+      <div class="expo-cards">
+        <div class="card"><i class="fas fa-palette"></i><h3>Art & Craft</h3><p>Curated showcases for local artisans.</p></div>
+        <div class="card"><i class="fas fa-chalkboard-user"></i><h3>Trade Fairs</h3><p>B2B & B2C networking opportunities.</p></div>
+        <div class="card"><i class="fas fa-music"></i><h3>Cultural Events</h3><p>Folk performances & festivities.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION (detailed) -->
+  <section id="aboutSection" class="page-section" style="display: none;">
+    <div class="container">
+      <h2 class="section-title">About Anandotsav Exhibition</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p><strong>Anandotsav Exhibition</strong> is a premier exhibition organizer, <strong>powered by SAVANT CREATION</strong>. Based in Sawantwadi, Maharashtra, we have curated numerous successful exhibitions in various cities across India. Our mission is to bridge the gap between creators, entrepreneurs, and the audience through vibrant events.</p>
+          <p style="margin-top: 1rem;">We specialize in large-scale exhibitions, thematic showcases, wedding expos, handmade product fairs, and lifestyle events. Our dedicated team ensures flawless execution — from venue design to vendor coordination. With each exhibition, we aim to spread joy and opportunities, making every event an “Anandotsav” (celebration of bliss).</p>
+          <p style="margin-top: 1rem;"><i class="fas fa-map-marker-alt" style="color:#d2691e;"></i> <strong>Head Office:</strong> Plot no 133,134 Savant Creation, Mazgaon, Sawantwadi, Maharashtra PIN 416510</p>
+          <p><i class="fas fa-phone-alt"></i> <strong>Contact:</strong> 7249777679</p>
+        </div>
+        <div style="background: #fff0e2; border-radius: 28px; padding: 1.5rem; text-align:center;">
+          <i class="fas fa-building" style="font-size: 3rem; color:#b85c1a;"></i>
+          <p style="margin-top: 1rem;"><strong>powered by SAVANT CREATION</strong><br>Creative minds behind flawless exhibitions</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT PAGE -->
+  <section id="contactSection" class="page-section" style="display: none;">
+    <div class="container">
+      <h2 class="section-title">Contact Us</h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="contact-detail"><i class="fas fa-phone-alt"></i> <span><strong>Mobile:</strong> 7249777679</span></div>
+          <div class="contact-detail"><i class="fas fa-envelope"></i> <span><strong>Email:</strong> anandotsav.exhibitions@gmail.com</span></div>
+          <div class="contact-detail"><i class="fas fa-map-pin"></i> <span><strong>Address:</strong> Plot no 133,134 Savant Creation, Mazgaon, Sawantwadi, Maharashtra 416510</span></div>
+          <div class="contact-detail"><i class="fas fa-clock"></i> <span><strong>Business Hours:</strong> Mon - Sat : 10:00 AM – 7:00 PM</span></div>
+          <hr style="margin: 1.5rem 0; border-color:#ffdcc0;">
+          <p><strong>For exhibition stalls, sponsorship or collaboration:</strong> Reach out to our team. We respond within 24 hours.</p>
+          <div style="margin-top: 1rem;"><i class="fas fa-globe"></i> Follow us: <i class="fab fa-instagram"></i> <i class="fab fa-facebook"></i> <i class="fab fa-linkedin"></i> (Coming soon)</div>
+        </div>
+        <div class="map-placeholder">
+          <i class="fas fa-map-marked-alt" style="font-size: 3rem; color:#c45c1b; margin-bottom: 0.8rem;"></i>
+          <p><strong>📍 Location</strong><br>Plot no 133,134, Savant Creation,<br>Mazgaon, Sawantwadi, MH 416510</p>
+          <p style="font-size:0.8rem; margin-top:0.8rem;"><i class="fas fa-location-dot"></i> Near Mazgaon Bus Stop, Sawantwadi</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVACY POLICY PAGE (Legal) -->
+  <section id="privacySection" class="page-section legal-page" style="display: none;">
+    <div class="container">
+      <h2 class="section-title">Privacy Policy</h2>
+      <div class="legal-content">
+        <p><strong>Effective Date:</strong> 1st April 2026</p>
+        <p>Anandotsav Exhibition (powered by SAVANT CREATION) respects your privacy. This Privacy Policy outlines how we collect, use, and safeguard your information when you visit our website or engage with our exhibitions.</p>
+        <h3>1. Information We Collect</h3>
+        <p>We may collect personal information such as name, email address, phone number, and company details when you register for events, subscribe to updates, or contact us. We also gather non-personal data via cookies (website usage).</p>
+        <h3>2. How We Use Your Information</h3>
+        <p>To respond to inquiries, send event updates, improve our exhibition services, process registrations, and ensure security. We never sell your personal data to third parties.</p>
+        <h3>3. Data Sharing</h3>
+        <p>We may share limited info with event partners only for coordination of exhibitions (e.g., venue, logistics). Legal authorities if required by law.</p>
+        <h3>4. Data Security</h3>
+        <p>We implement reasonable security measures to protect against unauthorized access. However, no online transmission is 100% secure.</p>
+        <h3>5. Third-Party Links</h3>
+        <p>Our website may link to external sites. We are not responsible for their privacy practices.</p>
+        <h3>6. Contact Us</h3>
+        <p>For any privacy concerns: <strong>anandotsav.exhibitions@gmail.com</strong> or call 7249777679.</p>
+        <p><i>Last updated: April 2026</i></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TERMS AND CONDITIONS PAGE -->
+  <section id="termsSection" class="page-section legal-page" style="display: none;">
+    <div class="container">
+      <h2 class="section-title">Terms & Conditions</h2>
+      <div class="legal-content">
+        <p>Welcome to Anandotsav Exhibition website. By accessing or using our services, you agree to abide by the following Terms & Conditions.</p>
+        <h3>1. Use of Website</h3>
+        <p>Content provided is for general information about exhibitions and events. We reserve the right to modify or cancel any exhibition schedule without prior notice.</p>
+        <h3>2. Exhibition Participation</h3>
+        <p>All exhibitors/vendors must adhere to the rules specified in the application form. Payments, stall allocation, and cancellations are subject to terms provided during registration. Anandotsav Exhibition is not responsible for any loss of goods or theft during the event, though security is provided.</p>
+        <h3>3. Intellectual Property</h3>
+        <p>All logos, trademarks, and creative assets are owned by SAVANT CREATION / Anandotsav Exhibition. Unauthorized use is prohibited.</p>
+        <h3>4. Limitation of Liability</h3>
+        <p>Anandotsav Exhibition is not liable for indirect damages arising from participation, including travel or accommodation issues caused by unforeseen circumstances.</p>
+        <h3>5. Governing Law</h3>
+        <p>These terms are governed by the laws of Maharashtra, India. Any disputes shall be subject to Sawantwadi jurisdiction.</p>
+        <h3>6. Changes to Terms</h3>
+        <p>We may update these T&C from time to time. Continued use of the site implies acceptance.</p>
+        <p>For questions: <strong>anandotsav.exhibitions@gmail.com</strong></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h3>Anandotsav Exhibition</h3>
+        <p>powered by SAVANT CREATION</p>
+        <p>Celebrating exhibitions across cities</p>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <a href="#" data-page="home">Home</a><br>
+        <a href="#" data-page="about">About</a><br>
+        <a href="#" data-page="contact">Contact</a><br>
+        <a href="#" data-page="privacy">Privacy Policy</a><br>
+        <a href="#" data-page="terms">Terms & Condition</a>
+      </div>
+      <div>
+        <h4>Reach Us</h4>
+        <p><i class="fas fa-phone"></i> 7249777679</p>
+        <p><i class="fas fa-envelope"></i> anandotsav.exhibitions@gmail.com</p>
+        <p><i class="fas fa-map-marker-alt"></i> Plot 133,134, Mazgaon, Sawantwadi, MH</p>
+      </div>
+    </div>
+    <div class="copyright">
+      © 2026 Copyright by Anandotsav Exhibition | powered by SAVANT CREATION. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // DOM elements
+  const sections = {
+    home: document.getElementById('homeSection'),
+    about: document.getElementById('aboutSection'),
+    contact: document.getElementById('contactSection'),
+    privacy: document.getElementById('privacySection'),
+    terms: document.getElementById('termsSection')
+  };
+
+  const navLinks = document.querySelectorAll('.nav-link');
+  const footerDynamicLinks = document.querySelectorAll('.footer-links a');
+
+  function showPage(pageId) {
+    // hide all sections
+    Object.keys(sections).forEach(key => {
+      if (sections[key]) {
+        sections[key].style.display = 'none';
+        // additionally remove active-legal class if any
+        sections[key].classList?.remove('active-legal');
+      }
+    });
+    // show selected
+    if (sections[pageId]) {
+      sections[pageId].style.display = 'block';
+      if (pageId === 'privacy' || pageId === 'terms') {
+        sections[pageId].classList.add('active-legal');
+      }
+    } else {
+      // fallback home
+      sections.home.style.display = 'block';
+    }
+
+    // update active nav style
+    navLinks.forEach(link => {
+      const pageAttr = link.getAttribute('data-page');
+      if (pageAttr === pageId) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+    // scroll to top on page change
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // attach event handlers to nav
+  function bindNavEvents() {
+    const allNavItems = document.querySelectorAll('[data-page]');
+    allNavItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const page = item.getAttribute('data-page');
+        if (page && sections[page]) {
+          showPage(page);
+          // close mobile menu if open
+          const navList = document.getElementById('navList');
+          if (navList.classList.contains('show')) {
+            navList.classList.remove('show');
+          }
+        } else if (page === 'home') {
+          showPage('home');
+        } else if (page === 'about') {
+          showPage('about');
+        } else if (page === 'contact') {
+          showPage('contact');
+        } else if (page === 'privacy') {
+          showPage('privacy');
+        } else if (page === 'terms') {
+          showPage('terms');
+        }
+      });
+    });
+  }
+
+  // Mobile menu toggle
+  const menuToggle = document.getElementById('mobileMenu');
+  const navList = document.getElementById('navList');
+  if (menuToggle) {
+    menuToggle.addEventListener('click', () => {
+      navList.classList.toggle('show');
+    });
+  }
+
+  // Additional contact button link handling inside home/about
+  const allContactTriggers = document.querySelectorAll('[data-page="contact"]');
+  allContactTriggers.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      showPage('contact');
+    });
+  });
+
+  // initial binding
+  bindNavEvents();
+  // also handle footer links manually
+  footerDynamicLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const pg = link.getAttribute('data-page');
+      if(pg && sections[pg]) showPage(pg);
+      else if(link.getAttribute('data-page') === 'home') showPage('home');
+      else if(link.getAttribute('data-page') === 'about') showPage('about');
+      else if(link.getAttribute('data-page') === 'contact') showPage('contact');
+      else if(link.getAttribute('data-page') === 'privacy') showPage('privacy');
+      else if(link.getAttribute('data-page') === 'terms') showPage('terms');
+    });
+  });
+
+  // show home by default
+  showPage('home');
+
+  // optional: add active class based on hash if any (just graceful)
+  if(window.location.hash === '#privacy') showPage('privacy');
+  if(window.location.hash === '#terms') showPage('terms');
+  if(window.location.hash === '#contact') showPage('contact');
+  if(window.location.hash === '#about') showPage('about');
+
+  // ensure all business details are shown: address, phone, email, powered by etc in multiple places.
+  console.log("Anandotsav Exhibition website ready | powered by SAVANT CREATION");
+</script>
+</body>
+</html>
